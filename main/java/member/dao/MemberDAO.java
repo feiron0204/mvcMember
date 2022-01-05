@@ -60,7 +60,7 @@ public class MemberDAO {
 	}
 	
 	public int write(MemberDTO dto) {
-		
+		int result=0;
 		String sql = "insert into member values (?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)";
 		this.getConnection();//호출
 		try {
@@ -78,7 +78,8 @@ public class MemberDAO {
 			pstmt.setString(11, dto.getAddr1());
 			pstmt.setString(12, dto.getAddr2());
 			//실행
-			return pstmt.executeUpdate();
+			result=pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -90,6 +91,6 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
-		return 0;
+		return result;
 	}
 }
