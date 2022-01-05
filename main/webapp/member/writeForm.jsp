@@ -22,7 +22,7 @@ color : red;
 </style>
 </head>
 <body>
-<form name="writeForm" id="writeForm" method="post" action="">
+<form name="writeForm" id="writeForm" method="post" action="http://localhost:8090/mvcMember/member/write.do">
 	<table border="1" cellspacing="0" cellpadding="5">
 		<tr>
 			<td width="100" align="center">이름</td>

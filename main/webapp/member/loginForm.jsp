@@ -14,7 +14,7 @@
 </style>
 </head>
 <body>
-	<form name="loginForm" id="loginForm" method="post" action="">
+	<form name="loginForm" id="loginForm" method="post" action="http://localhost:8090/mvcMember/member/login.do">
 		<table border="1" cellspacing="0" cellpadding="5">
 			<tr>
 				<td width="100" align="center">아이디</td>
@@ -29,14 +29,13 @@
 					<div id="pwdDiv"></div></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="button"
-					id="loginBtn" value="로그인"> <input type="button"
-					onclick="location.href='writeForm.do'" value="회원가입"></td>
+				<td colspan="2" align="center">
+				<input type="button" id="loginBtn" value="로그인"> 
+				<input type="button" onclick="location.href='writeForm.do'" value="회원가입"></td>
 			</tr>
 		</table>
 	</form>
-	<script type="text/javascript"
-		src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 		$('#loginBtn').click(function() {
 			$('#idDiv').empty();
