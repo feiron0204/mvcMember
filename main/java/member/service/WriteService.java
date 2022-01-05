@@ -28,10 +28,11 @@ public class WriteService implements CommandProcess {
 		
 		MemberDAO dao = new MemberDAO();
 		int result=dao.write(dto);
-		if(result!=0)
-			return "/member/writeOk.jsp";
-		else
+		if(result==0)
 			return "/member/writeFail.jsp";
+		else
+			return "/member/writeOk.jsp";
+		
 	}
 
 }
