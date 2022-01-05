@@ -26,16 +26,16 @@ public class ControlServlet extends HttpServlet {
 	      String propertyConfig = config.getInitParameter("propertyConfig");
 	      System.out.println("propertyConfig = " + propertyConfig);
 	      
-	      String realFolder = config.getServletContext().getRealPath("/WEB-INF");
-	      String realPath = realFolder + "/" + propertyConfig;
-	      System.out.println("realPath = " +realPath);
+	      //String realFolder = config.getServletContext().getRealPath("/WEB-INF");
+	      //String realPath = realFolder + "/" + propertyConfig;
+	      //System.out.println("realPath = " +realPath);
 	      
 	      FileInputStream fin = null;
 	      Properties properties = new Properties();
 	      
 	      try {
-	         //fin = new FileInputStream(propertyConfig);
-	         fin = new FileInputStream(realPath);
+	         fin = new FileInputStream(propertyConfig);
+	         //fin = new FileInputStream(realPath);
 	         
 	         properties.load(fin);
 	         System.out.println("properties = "+properties);

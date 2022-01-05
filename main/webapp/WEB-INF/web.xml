@@ -9,7 +9,7 @@
   	<!-- 누가 서블릿이냐!! 패키지명까지 써줘야 풀네임임 -->
   	<!-- properties 알려주기 -->
   	<init-param>
-  		<param-name>commandProperty</param-name>
+  		<param-name>propertyConfig</param-name>
   		<!-- \ 이거하나는 이스케이프문자로 처리되버림 -->
   		<!-- <param-value>C:\\java_ee\\workspace\\mvcMember\\src\\main\\webapp\\WEB-INF\\command.properties</param-value> -->
   		<param-value>C:/java_ee/workspace/mvcMember/src/main/webapp/WEB-INF/command.properties</param-value>

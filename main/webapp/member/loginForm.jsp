@@ -31,7 +31,7 @@
 			<tr>
 				<td colspan="2" align="center"><input type="button"
 					id="loginBtn" value="로그인"> <input type="button"
-					onclick="location.href='writeForm.jsp'" value="회원가입"></td>
+					onclick="location.href='writeForm.do'" value="회원가입"></td>
 			</tr>
 		</table>
 	</form>
