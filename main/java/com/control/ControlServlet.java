@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
 //@WebServlet("*.do")
 public class ControlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -98,6 +99,8 @@ public class ControlServlet extends HttpServlet {
 		System.out.println("category = "+category);// /member/writeForm.do
 		//이제 이걸 이용해서 properties 한테 어디로가야하는지 물어보고 위치받을껴
 		CommandProcess com = (CommandProcess)map.get(category); //member.service.WriteFormService
+		
+		
 	      String view = null;
 	      
 	      try {
