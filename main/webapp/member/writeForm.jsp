@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%! String name = "홍길동"; %>
+    <% int age = 25; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -227,7 +230,7 @@ $('#writeBtn').click(function(){
 <!-- 
 <input type="button">
 
-<button ~~~></button>
+<button ~~~></button> -- return false해버리면 서브밋못함
 
 <div></div> <span></span>
 
