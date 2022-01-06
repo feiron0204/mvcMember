@@ -37,7 +37,7 @@ color : red;
 			<td width="100" align="center">아이디</td>
 			<td>
 				<input type="text" name="id" id="id" placeholder="아이디 입력">
-				<input type="button" value="중복체크">
+				<input type="button" name="checkIdBtn" id="checkIdBtn" value="중복체크">
 				<div id="idDiv"></div>
 			</td>	
 		</tr>
@@ -119,6 +119,8 @@ color : red;
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 다음 우편번호 검색을 위한 스크립트 -->
 <script type="text/javascript">
+
+//회원가입
 $('#writeBtn').click(function(){
 	$('#nameDiv').empty();
 	$('#idDiv').empty();
@@ -131,7 +133,21 @@ $('#writeBtn').click(function(){
 	else if($('#pwd').val() != $('#repwd').val()) $('#repwdDiv').text("비밀번호가 맞지 않습니다.");
 	else document.writeForm.submit();
 });
-// jquery로 쓰면 아래 위 이거한줄로끝
+// jquery로 쓰면 맨 아래 자잘한 주석 위 이거한줄로끝
+
+//아이디 중복 체크
+//$('#checkIdBtn').click(function(){});
+$('input[name="checkIdBtn"]').click(function(){
+	var sId=$('#id').val();
+	if(sId=="") {
+		$('#idDiv').text('먼저 아이디를 입력해주세요.');
+		$('#idDiv').css('color','magenta');
+	}else{
+		window.open("/mvcMember/member/checkId.do?id="+sId,"checkId","width=300 height=150");
+		//이름주면 안열림(중간에넣는값)
+	}
+							
+});
 
 //이거 아래는 다음에서 지원해준거
  function checkPost() {

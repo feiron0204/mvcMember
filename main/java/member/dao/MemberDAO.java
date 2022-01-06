@@ -6,64 +6,79 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import member.bean.MemberDTO;
 
 public class MemberDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-	
+
 	private static MemberDAO instance;
 	
+	private DataSource ds;
+
 	public static MemberDAO getInstance() {
-		//동기화처리를하면서 쓰레드처리
-		if(instance==null) {
-			synchronized(MemberDAO.class) {
+		// 동기화처리를하면서 쓰레드처리
+		synchronized (MemberDAO.class) {
+			if (instance == null) {
 				instance = new MemberDAO();
 			}
 		}
 		return instance;
 	}
-	
+
 	public MemberDAO() {
+		/*커넥션풀 하기 이전
+		 * try { // driver loading Class.forName("oracle.jdbc.driver.OracleDriver");
+		 * System.out.println("driver loading"); } catch (ClassNotFoundException e) {
+		 * e.printStackTrace(); }
+		 */
 		try {
-			//driver loading
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("driver loading");
-		} catch (ClassNotFoundException e) {
+			Context context = new InitialContext();
+//			ds=(DataSource)context.lookup("jdbc/oracle");
+			ds=(DataSource)context.lookup("java:comp/env/jdbc/oracle");//Tomcat의 경우에만 구역까지넣어야함
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void getConnection() {
-		try {
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","bituser","1004");
-			System.out.println("connection success");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
+
+	/*커넥션풀 하기 이전
+	 * public void getConnection() { try { conn =
+	 * DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "bituser",
+	 * "1004"); System.out.println("connection success"); } catch (SQLException e) {
+	 * e.printStackTrace(); } }
+	 */
+
 	public String login(String id, String pwd) {
-		String name=null;
+		String name = null;
 		String sql = "select * from member where id=? and pwd=?";
-		this.getConnection();//호출
+//		this.getConnection();// 호출
 		try {
-			pstmt=conn.prepareStatement(sql);//문장처리하는 가이드 생성
+			conn = ds.getConnection();
+			
+			pstmt = conn.prepareStatement(sql);// 문장처리하는 가이드 생성
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
-			//실행
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				name=rs.getString("name");
+			// 실행
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				name = rs.getString("name");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(rs!=null) rs.close();
-				if(pstmt!=null) pstmt.close();
-				if(conn!=null) conn.close();
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -72,11 +87,11 @@ public class MemberDAO {
 	}
 
 	public void write(MemberDTO memberDTO) {
-		String sql="insert into member values (?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)";
-		
-		getConnection();//접속
-		
+		String sql = "insert into member values (?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)";
+
+
 		try {
+			conn=ds.getConnection();// 접속
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberDTO.getName());
 			pstmt.setString(2, memberDTO.getId());
@@ -90,22 +105,24 @@ public class MemberDAO {
 			pstmt.setString(10, memberDTO.getZipcode());
 			pstmt.setString(11, memberDTO.getAddr1());
 			pstmt.setString(12, memberDTO.getAddr2());
-			
+
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				if(pstmt!=null) pstmt.close();
-				if(conn!=null) conn.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 //	public boolean write(MemberDTO dto) {
 //		int result=0;
 //		String sql = "insert into member values (?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)";
@@ -139,4 +156,58 @@ public class MemberDAO {
 //		}
 //		return result>0?true:false;
 //	}
+	public boolean checkById(String id) {
+		boolean result=false;
+		String sql="select * from member where id=?";
+		try {
+			conn=ds.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			result=rs.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+
+	public boolean isExistId(String id) {
+		boolean exist=false;
+		String sql="select * from member where id=?";
+		
+		try {
+			conn=ds.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			exist=rs.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return exist;
+	}
 }
