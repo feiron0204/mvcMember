@@ -138,12 +138,13 @@ $('#writeBtn').click(function(){
 //아이디 중복 체크
 //$('#checkIdBtn').click(function(){});
 $('input[name="checkIdBtn"]').click(function(){
+	$('#idDiv').empty();
 	var sId=$('#id').val();
 	if(sId=="") {
 		$('#idDiv').text('먼저 아이디를 입력해주세요.');
 		$('#idDiv').css('color','magenta');
 	}else{
-		window.open("/mvcMember/member/checkId.do?id="+sId,"checkId","width=300 height=150");
+		window.open("/mvcMember/member/checkId.do?id="+sId,"checkId","width=300 height=150 left=700 top=300");
 		//이름주면 안열림(중간에넣는값)
 	}
 							

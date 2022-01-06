@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>사용 가능</h3>
+<h3>${id}는(은)사용 가능합니다</h3>
 </body>
 </html>

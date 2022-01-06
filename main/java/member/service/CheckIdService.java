@@ -21,7 +21,7 @@ public class CheckIdService implements CommandProcess {
 		//DB
 		MemberDAO memberDAO=MemberDAO.getInstance();
 		boolean exist = memberDAO.isExistId(id);
-		
+		request.setAttribute("id", id);
 		//응답
 		if(exist)
 			return "/member/checkIdFail.jsp";//사용 불가능
