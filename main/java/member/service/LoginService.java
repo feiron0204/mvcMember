@@ -21,6 +21,7 @@ public class LoginService implements CommandProcess {
 		String name=memberDAO.login(id,pwd);//호출
 		//응답
 		request.setAttribute("name", name);
+		request.setAttribute("id", id);
 		if(name==null)
 			return "/member/loginFail.jsp";
 		else

@@ -37,6 +37,7 @@ color : red;
 			<td width="100" align="center">아이디</td>
 			<td>
 				<input type="text" name="id" id="id" placeholder="아이디 입력">
+				<input type="hidden" name="checkIdHidden" id="checkIdHidden" value="not">
 				<input type="button" name="checkIdBtn" id="checkIdBtn" value="중복체크">
 				<div id="idDiv"></div>
 			</td>	
@@ -119,6 +120,9 @@ color : red;
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 다음 우편번호 검색을 위한 스크립트 -->
 <script type="text/javascript">
+$('#id').change(function(){
+	$('#checkIdHidden').val("not");
+});
 
 //회원가입
 $('#writeBtn').click(function(){
@@ -131,6 +135,7 @@ $('#writeBtn').click(function(){
 	else if($('#id').val() =="") $('#idDiv').text("아이디를 입력하세요");
 	else if($('#pwd').val() =="") $('#pwdDiv').text("비밀번호를 입력하세요");
 	else if($('#pwd').val() != $('#repwd').val()) $('#repwdDiv').text("비밀번호가 맞지 않습니다.");
+	else if($('#checkIdHidden').val()=="not") $('#idDiv').text("아이디 중복확인을 진행해주세요.")
 	else document.writeForm.submit();
 });
 // jquery로 쓰면 맨 아래 자잘한 주석 위 이거한줄로끝
@@ -144,7 +149,7 @@ $('input[name="checkIdBtn"]').click(function(){
 		$('#idDiv').text('먼저 아이디를 입력해주세요.');
 		$('#idDiv').css('color','magenta');
 	}else{
-		window.open("/mvcMember/member/checkId.do?id="+sId,"checkId","width=300 height=150 left=700 top=300");
+		window.open("/mvcMember/member/checkId.do?id="+sId,"checkId","width=450 height=150 left=700 top=300");
 		//이름주면 안열림(중간에넣는값)
 	}
 							
