@@ -18,6 +18,7 @@ public class LoginService implements CommandProcess {
 		MemberDAO memberDAO = new MemberDAO();
 		String name=memberDAO.login(id,pwd);//호출
 		//응답
+		request.setAttribute("name", name);
 		if(name==null)
 			return "/member/loginFail.jsp";
 		else

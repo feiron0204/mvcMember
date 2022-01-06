@@ -13,6 +13,8 @@ public class MemberDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	private static MemberDAO memberDAO;
+	
 	public MemberDAO() {
 		try {
 			//driver loading
@@ -59,7 +61,7 @@ public class MemberDAO {
 		return name;
 	}
 	
-	public int write(MemberDTO dto) {
+	public boolean write(MemberDTO dto) {
 		int result=0;
 		String sql = "insert into member values (?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)";
 		this.getConnection();//호출
@@ -84,13 +86,12 @@ public class MemberDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(rs!=null) rs.close();
 				if(pstmt!=null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return result;
+		return result>0?true:false;
 	}
 }

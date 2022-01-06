@@ -27,11 +27,11 @@ public class WriteService implements CommandProcess {
 		dto.setAddr2(request.getParameter("addr2"));
 		
 		MemberDAO dao = new MemberDAO();
-		int result=dao.write(dto);
-		if(result==0)
-			return "/member/writeFail.jsp";
-		else
+		boolean result=dao.write(dto);
+		if(result)
 			return "/member/writeOk.jsp";
+		else
+			return "/member/writeFail.jsp";
 		
 	}
 
