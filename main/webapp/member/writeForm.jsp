@@ -112,7 +112,7 @@ color : red;
 				<!-- <input type="button" onclick="javascript:checkWrite()" value="회원가입"> -->
 				<!-- <input type="button" onclick="checkWrite()" value="회원가입"> -->
 				<input type="button" id="writeBtn" value="회원가입">
-				<input type="reset" value="다시작성">
+				<input type="reset" id="resetBtn" value="다시작성">
 			</td>
 		</tr>
 	</table>
@@ -123,7 +123,13 @@ color : red;
 $('#id').change(function(){
 	$('#checkIdHidden').val("not");
 });
-
+$('#resetBtn').click(function(){
+	$('#nameDiv').empty();
+	$('#idDiv').empty();
+	$('#pwdDiv').empty();
+	$('#repwdDiv').empty();
+	
+});
 //회원가입
 $('#writeBtn').click(function(){
 	$('#nameDiv').empty();
@@ -147,7 +153,7 @@ $('input[name="checkIdBtn"]').click(function(){
 	var sId=$('#id').val();
 	if(sId=="") {
 		$('#idDiv').text('먼저 아이디를 입력해주세요.');
-		$('#idDiv').css('color','magenta');
+		//$('#idDiv').css('color','magenta');
 	}else{
 		window.open("/mvcMember/member/checkId.do?id="+sId,"checkId","width=450 height=150 left=700 top=300");
 		//이름주면 안열림(중간에넣는값)
