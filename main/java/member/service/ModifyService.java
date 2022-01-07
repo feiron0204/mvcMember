@@ -2,6 +2,7 @@ package member.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.control.CommandProcess;
 
@@ -43,10 +44,17 @@ public class ModifyService implements CommandProcess {
 	      MemberDAO memberDAO=MemberDAO.getInstance();
 	      memberDAO.modify(memberDTO);
 	      
-	      request.setAttribute("name", name);
-	      request.setAttribute("id", id);
+	      HttpSession session=request.getSession();
+	      session.invalidate();
+	      //memberDAO.update(memberDTO);
+	      
+			/*
+			 * request.setAttribute("name", name); 
+			 * request.setAttribute("id", id);
+			 */
 	      //응답
-	      return "/member/loginOk.jsp";
+	      //return "/member/loginOk.jsp";
+	      return "/member/modifyOk.jsp";
 	}
 
 }
