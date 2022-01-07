@@ -51,8 +51,10 @@ color : red;
 		<tr>
 			<td width="100" align="center">성별</td>
 			<td>
-				<input type="radio" name="gender" value="0" ${memberDTO.gender==0?"checked":""}>남
-				<input type="radio" name="gender" value="1" ${memberDTO.gender==1?"checked":""}>여
+				<%-- <input type="radio" name="gender" value="0" ${memberDTO.gender==0?"checked":""}>남
+				<input type="radio" name="gender" value="1" ${memberDTO.gender==1?"checked":""}>여 --%>
+				<input type="radio" name="gender" value="0" >남
+				<input type="radio" name="gender" value="1" >여
 			</td>
 		</tr>
 		
@@ -74,9 +76,12 @@ color : red;
 			<td width="100" align="center">핸드폰</td>
 			<td>
 				<select name="tel1" >
-					<option value="010" ${memberDTO.tel1==010?"selected":""}>010</option>
+					<%-- <option value="010" ${memberDTO.tel1==010?"selected":""}>010</option>
 					<option value="011" ${memberDTO.tel1==011?"selected":""}>011</option>
-					<option value="019" ${memberDTO.tel1==019?"selected":""}>019</option>
+					<option value="019" ${memberDTO.tel1==019?"selected":""}>019</option> --%>
+					<option value="010" >010</option>
+					<option value="011" >011</option>
+					<option value="019" >019</option>
 				</select>
 				-
 				<input type="text" name="tel2" size="6" maxlength="4" value="${memberDTO.tel2}">
@@ -98,7 +103,8 @@ color : red;
 		<tr>
 			<td colspan="2" align="center">
 				<input type="button" id="modifyBtn" value="회원정보수정">
-				<input type="reset" id="resetBtn" value="다시작성">
+				<!-- <input type="reset" id="resetBtn" value="다시작성"> -->
+				<input type="reset" id="resetBtn" value="다시작성" onclick="location.reload()">
 				<input type="button" id="back" value="뒤로가기" onclick="javascrip:history.back()">
 			</td>
 		</tr>
@@ -107,17 +113,23 @@ color : red;
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 다음 우편번호 검색을 위한 스크립트 -->
 <script type="text/javascript">
+$(function(){
+	
+	document.modifyForm.gender['${memberDTO.gender}'].checked=true;
+
+	document.modifyForm.email2.value='${memberDTO.email2}';
+	document.modifyForm.tel1.value='${memberDTO.tel1}';
+});
+
 $('#modifyBtn').click(function(){
 	$('#nameDiv').empty();
-	$('#idDiv').empty();
 	$('#pwdDiv').empty();
 	$('#repwdDiv').empty();
 	
 	if($('#name').val() == "") $('#nameDiv').text("이름을 입력하세요");
-	else if($('#id').val() =="") $('#idDiv').text("아이디를 입력하세요");
 	else if($('#pwd').val() =="") $('#pwdDiv').text("비밀번호를 입력하세요");
 	else if($('#pwd').val() != $('#repwd').val()) $('#repwdDiv').text("비밀번호가 맞지 않습니다.");
-	else document.writeForm.submit();
+	else document.modifyForm.submit();
 });
 
 $('#resetBtn').click(function(){

@@ -29,7 +29,9 @@ session.getAttribute("memName");//이런식인데 EL에있음
 <!-- <h3>${name}님 로그인 성공</h3> -->
 <h3>${sessionScope.memName}님 로그인 성공</h3>
 
-<input type="button" value="회원정보수정" id="modifyBtn" onclick="location.href='modifyForm.do?id=${id}'">
+<%-- 이젠 세션에 실려있음 id정보가
+<input type="button" value="회원정보수정" id="modifyBtn" onclick="location.href='modifyForm.do?id=${id}'"> --%>
+<input type="button" value="회원정보수정" id="modifyBtn" onclick="location.href='modifyForm.do'">
 <input type="button" value="로그아웃" onclick="location.href='/mvcMember/member/logout.do'">
 <!-- 강사님답 (세션처리후라서 id 가져갈필요없음)
 <input type="button" value="회원정보수정" id="modifyBtn">

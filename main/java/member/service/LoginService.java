@@ -22,8 +22,10 @@ public class LoginService implements CommandProcess {
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		String name=memberDAO.login(id,pwd);//호출
 		//응답
-		request.setAttribute("name", name);
-		request.setAttribute("id", id);
+		/*
+		 * request.setAttribute("name", name); 
+		 * request.setAttribute("id", id);
+		 */
 		
 		
 		if(name==null)
