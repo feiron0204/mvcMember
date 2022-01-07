@@ -7,7 +7,7 @@
 <title>회원정보수정</title>
 <style type="text/css">
 
-#writeForm div{
+#modifyForm div{
 color : red;
 	font-size: 8pt;
 	font-weight: bold;
@@ -15,7 +15,7 @@ color : red;
 </style>
 </head>
 <body>
-<form name="writeForm" id="writeForm" method="post" action="/mvcMember/member/modify.do">
+<form name="modifyForm" id="modifyForm" method="post" action="/mvcMember/member/modify.do">
 	<table border="1" cellspacing="0" cellpadding="5">
 		<tr>
 			<td width="100" align="center">이름</td>
@@ -28,8 +28,7 @@ color : red;
 		<tr>
 			<td width="100" align="center">아이디</td>
 			<td>
-				<input type="text" name="id" id="id" placeholder="아이디 입력" value="${memberDTO.id}" readonly>
-				<div id="idDiv"></div>
+				<input type="text" name="id" id="id" value="${memberDTO.id}" readonly>
 			</td>	
 		</tr>
 		
@@ -153,6 +152,7 @@ function checkPost() {
 
 </body>
 </html>
+
 
 
 

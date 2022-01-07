@@ -166,7 +166,6 @@ public class MemberDAO {
 			rs=pstmt.executeQuery();
 			result=rs.next();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			try {
@@ -210,6 +209,49 @@ public class MemberDAO {
 		}
 		return exist;
 	}
+	
+	/*강사님답
+	   public MemberDTO modify(String id){
+	   		MemberDTO memberDTO = null;
+	   		String sql = "select * from member where id=?";
+	   		try {
+			conn=ds.getConnection();//접속
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();//실행
+			if(rs.next()) {
+				memberDTO=new MemberDTO();
+				memberDTO.setName(rs.getString("name"));
+				memberDTO.setId(rs.getString("id"));
+				memberDTO.setPwd(rs.getString("pwd"));
+				memberDTO.setGender(rs.getString("gender"));
+				memberDTO.setEmail1(rs.getString("email1"));
+				memberDTO.setEmail2(rs.getString("email2"));
+				memberDTO.setTel1(rs.getString("tel1"));
+				memberDTO.setTel2(rs.getString("tel2"));
+				memberDTO.setTel3(rs.getString("tel3"));
+				memberDTO.setZipcode(rs.getString("zipcode"));
+				memberDTO.setAddr1(rs.getString("addr1"));
+				memberDTO.setAddr2(rs.getString("addr2"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	   		
+	   		return memberDTO;
+	   }
+	 */
 
 	public MemberDTO selectOne(String id) {
 		MemberDTO memberDTO = null;
