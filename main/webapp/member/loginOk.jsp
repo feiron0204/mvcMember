@@ -15,6 +15,8 @@ if(ar !=null){
 	}
 }
 
+//세션
+session.getAttribute("memName");//이런식인데 EL에있음
 %>
 
 <!DOCTYPE html>
@@ -24,7 +26,8 @@ if(ar !=null){
 <title>Insert title here</title>
 </head>
 <body>
-<h3>${name}님 로그인 성공</h3>
+<!-- <h3>${name}님 로그인 성공</h3> -->
+<h3>${sessionScope.memName}님 로그인 성공</h3>
 
 <input type="button" value="회원정보수정" onclick="location.href='modifyForm.do?id=${id}'" id="modifyBtn">
 <input type="button" value="로그아웃" onclick="location.href='/mvcMember/member/logout.do'">
