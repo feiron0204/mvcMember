@@ -1,5 +1,7 @@
 package exam;
 
+import java.util.Map;
+
 public class SingleTonMain {
 	private int a;
 	private static int b;
@@ -19,6 +21,7 @@ public class SingleTonMain {
 		cc.a++;//1
 		cc.b++;//3
 		System.out.println("a="+cc.a+"     b="+cc.b);
+		
 	}
 
 }

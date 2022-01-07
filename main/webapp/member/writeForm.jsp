@@ -39,6 +39,10 @@ color : red;
 				<input type="text" name="id" id="id" placeholder="아이디 입력">
 				<input type="hidden" name="checkIdHidden" id="checkIdHidden" value="not">
 				<input type="button" name="checkIdBtn" id="checkIdBtn" value="중복체크">
+				<!-- 강사님체크확인
+				<input type="hidden" name="check" id="check" value="">
+				
+				 -->
 				<div id="idDiv"></div>
 			</td>	
 		</tr>
@@ -141,7 +145,10 @@ $('#writeBtn').click(function(){
 	else if($('#id').val() =="") $('#idDiv').text("아이디를 입력하세요");
 	else if($('#pwd').val() =="") $('#pwdDiv').text("비밀번호를 입력하세요");
 	else if($('#pwd').val() != $('#repwd').val()) $('#repwdDiv').text("비밀번호가 맞지 않습니다.");
-	else if($('#checkIdHidden').val()=="not") $('#idDiv').text("아이디 중복확인을 진행해주세요.")
+	else if($('#checkIdHidden').val()=="not") $('#idDiv').text("아이디 중복확인을 진행해주세요.");
+	/* 강사님답
+	else if($('#id').val() != $('#check').val()) $('#idDiv').text("중복체크하세요");
+	*/
 	else document.writeForm.submit();
 });
 // jquery로 쓰면 맨 아래 자잘한 주석 위 이거한줄로끝

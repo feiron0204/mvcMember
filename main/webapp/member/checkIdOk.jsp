@@ -19,6 +19,9 @@ function checkIdClose(id){
 	//opener.document.writeForm.pwd.focus();
 	$('#pwd',opener.document).focus();//나한테pwd찾지말고 opener에서 찾앙!
 	$('#checkIdHidden',opener.document).val("ok");
+	/* 강사님답
+	$('#check',opener.document).val(id);
+	*/
 }	
 
 </script>
